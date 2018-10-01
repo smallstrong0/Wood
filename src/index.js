@@ -1,8 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import React, {PropTypes} from 'react'
+import ReactDOM from 'react-dom'
+import {Provider} from 'react-redux'
+import route from './router/route'
+import store from './redux/store'
+
+
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+
 registerServiceWorker();
+
+const App = () => {
+    return (
+        <Provider store={store}>
+            {route}
+        </Provider>
+    )
+}
+
+ReactDOM.render(
+    <App/>,
+    document.getElementById('container'));
+
+
+
+
+
+
