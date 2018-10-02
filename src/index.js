@@ -1,8 +1,7 @@
-import React, {PropTypes} from 'react'
-import ReactDOM from 'react-dom'
-import {Provider} from 'react-redux'
-import route from './router/route'
-import store from './redux/store'
+import React from 'react'
+import {render} from 'react-dom'
+import {BrowserRouter} from 'react-router-dom'
+import App from './components/App';
 
 
 import registerServiceWorker from './registerServiceWorker';
@@ -10,17 +9,14 @@ import registerServiceWorker from './registerServiceWorker';
 
 registerServiceWorker();
 
-const App = () => {
-    return (
-        <Provider store={store}>
-            {route}
-        </Provider>
-    )
-}
 
-ReactDOM.render(
-    <App/>,
-    document.getElementById('container'));
+render((
+    <BrowserRouter>
+        <App/>
+    </BrowserRouter>
+), document.getElementById('container'));
+
+
 
 
 
