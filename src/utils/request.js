@@ -8,17 +8,17 @@ const request = (options) => {
         body: JSON.stringify(params),
     }).then(res => res.json()).then((res) => {
         console.log(res)
-        const {code, data, error_msg} = res
-        if (code === 0) {
-            return Promise.resolve({
-                success: true,
-                data,
-            })
-        }
-        return Promise.resolve({
-            success: false,
-            message: error_msg,
-        })
+        // const {code, data, error_msg} = res
+        // if (code === 0) {
+        //     return Promise.resolve({
+        //         success: true,
+        //         data,
+        //     })
+        // }
+        // return Promise.resolve({
+        //     success: false,
+        //     message: error_msg,
+        // })
     })
 }
 

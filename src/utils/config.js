@@ -1,14 +1,12 @@
 const HOSTS = () => {
-    return 'https://smallstrong.site/'
+    return 'https://smallstrong.site/api/'
 }
 
 const API_HOST = HOSTS()
 
-const PROJECT_NAME = 'wte'
+const PROJECT_NAME = 'wte_api/'
 
-const VERSION = '/0.1/'
-
-const API_PATH = `${API_HOST}${PROJECT_NAME}${VERSION}`
+const API_PATH = `${API_HOST}${PROJECT_NAME}`
 
 module.exports = {
     API_PATH,
