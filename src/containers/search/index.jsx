@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Input, List} from 'antd';
+import {Input, List, Avatar, Icon} from 'antd';
 import styles from './index.less'
 import request from '../../utils/request'
 
@@ -32,10 +32,10 @@ export default class Search extends React.Component {
             api_name: 'search/list',
             params: {}
         }).then(success => {
-            var data_list = success['result_list'];
+            let data_list = success['result_list'];
             let abc = [];
-            for (var i in data_list) {
-                abc.push(data_list[i]['dish_name'])
+            for (let i in data_list) {
+                abc.push(data_list[i])
             }
             this.setState({
                 data: abc,
@@ -57,11 +57,21 @@ export default class Search extends React.Component {
                        onPressEnter={this.search.bind(this)}
                 />
                 <List className="list"
-                    // header={<div>Header</div>}
-                    // footer={<div>Footer</div>}
-                    // bordered
                       dataSource={this.state.data}
-                      renderItem={item => (<List.Item>{item}</List.Item>)}
+                      renderItem={item =>
+                          <List.Item
+                              key={item['key']}
+                              extra={<img width={272} alt="logo"
+                                          src={item['dish_img']}/>}
+                          >
+                              <List.Item.Meta
+                                  avatar={<Avatar src={item['author_logo']}/>}
+                                  title={<a href={item.href}>{item['author']}</a>}
+                                  description={item['dish_name']}
+                              />
+
+                          </List.Item>
+                      }
                 />
             </div>
         )
