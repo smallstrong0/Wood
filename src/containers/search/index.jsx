@@ -3,13 +3,6 @@ import {Input, List} from 'antd';
 import styles from './index.less'
 import request from '../../utils/request'
 
-const data = [
-    'Racing car sprays burning fuel into crowd.',
-    'Japanese princess to wed commoner.',
-    'Australian walks 100km after outback crash.',
-    'Man charged over missing wedding girl.',
-    'Los Angeles battles huge wildfires.',
-];
 
 export default class Search extends React.Component {
 
@@ -17,7 +10,9 @@ export default class Search extends React.Component {
         super(props)
         this.state = {
             text: '',
-        }
+            data: [],
+        };
+
     }
 
     changeText(e) {
@@ -34,9 +29,23 @@ export default class Search extends React.Component {
         console.log('搜索内容为：' + this.state.text)
 
         request({
-            api_name: 'search/ts',
+            api_name: 'search/list',
             params: {}
-        })
+        }).then(success => {
+            var data_list = success['result_list'];
+            let abc = [];
+            for (var i in data_list) {
+                abc.push(data_list[i]['dish_name'])
+            }
+            this.setState({
+                data: abc,
+            });
+
+        }, error => {
+            console.log(error)
+        });
+
+
     }
 
 
@@ -48,10 +57,10 @@ export default class Search extends React.Component {
                        onPressEnter={this.search.bind(this)}
                 />
                 <List className="list"
-                      header={<div>Header</div>}
-                      footer={<div>Footer</div>}
-                      bordered
-                      dataSource={data}
+                    // header={<div>Header</div>}
+                    // footer={<div>Footer</div>}
+                    // bordered
+                      dataSource={this.state.data}
                       renderItem={item => (<List.Item>{item}</List.Item>)}
                 />
             </div>
